@@ -1,0 +1,249 @@
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hero-case-study{
+    margin-top: 8rem;
+    padding:  2rem;
+    width: 100%;
+}
+h1{
+    text-align: start;
+}
+.bold {
+    font-weight: 500;
+}
+.italic{
+font-family: hanken-italic;
+line-height: 1;
+}
+.project{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 3rem;
+}
+
+.video2-3{
+   scroll-snap-align: none; 
+}
+.shadow{
+
+    box-shadow: 0 0px 50px rgba(0, 0, 0, 0.419);
+}
+/* ============================================================
+   EDITO SECTION
+   ============================================================ */
+
+.edito {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    padding: 3rem;
+    gap: 3rem;
+}
+
+.edito-1 { flex: 1; }
+.edito-2 { flex: 2; }
+
+.context,
+.approach {
+    font-family: var(--font-main);
+    color: var(--dark-to-light);
+    font-weight: 300;
+    line-height: 2;
+    text-align: justify;
+    max-width: 120ch;
+}
+
+.context { max-width: 50ch; }
+
+
+/* Conteneur Global */
+/* ============================================================
+   GRID LAYOUT (CUSTOM GRID)
+   ============================================================ */
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.s-item {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    box-shadow: var(--shadow-grid);
+}
+
+.s-item:nth-child(3n + 1) {
+    grid-column: span 2;
+}
+
+.s-item img,
+.s-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+/* ============================================================
+   CONCLUSION SECTION
+   ============================================================ */
+
+.conclusion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.conclu-txt .bold {
+    line-height: 1.2;
+}
+
+/* ============================================================
+   NEXT PROJECT SECTION
+   ============================================================ */
+
+.next-project-section {
+    width: 100%;
+    padding: 16rem 3rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.next-project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.next-title {
+    font-family: var(--font-main);
+    color: var(--dark-to-light);
+    margin: 0;
+}
+
+.next-project-name {
+    font-family: var(--font-main);
+    color: var(--dark-to-light);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-weight: 500;
+}
+
+.next-project-link {
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.next-project-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+}
+
+.next-project-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    transform-origin: center center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.next-project-link:hover .next-project-image-wrapper img {
+    transform: scale(1);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .hero-case-study{
+        padding: 1.5rem;
+         gap: 0.5rem;
+    }
+    .edito {
+        flex-direction: column;
+        gap: 3rem;
+        padding: 1.5rem;
+    }
+
+    .context,
+    .approach {
+        max-width: 100%;
+    }
+
+    h1 { text-align: left; 
+        margin-bottom: 1rem;
+
+    }
+
+    .project {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-detail { 
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: left; }
+
+    .next-title {
+        margin-left: 0;
+        height: 3rem;
+    }
+
+    .conclusion {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .conclu-txt {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .next-project-section {
+        padding: 4rem 0rem 2rem 0rem;
+        gap: 0.5rem
+    }
+
+    .next-project-header {
+    padding: 0 1rem ;
+    }
+
+    .custom-grid {
+        grid-template-columns: 1fr;
+        padding: 3rem 0;
+    }
+
+    .s-item:nth-child(3n + 1) {
+        grid-column: span 1;
+    }
+}
+

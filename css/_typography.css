@@ -1,0 +1,68 @@
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+@font-face {
+  font-family: 'hanken';
+  src: url('../fonts/HankenGrotesk-VariableFont_wght.ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'hanken-italic';
+  src: url('../fonts/HankenGrotesk-Italic-VariableFont_wght.ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1, h2, h3, p, a, .footer-menu, .btn-copy, .cta-p, small, .time-display {
+  font-family: var(--font-main);
+  color: var(--dark-to-light);
+  font-weight: 300;
+}
+
+h1 {
+  font-size: clamp(3rem, 1.72rem + 5.45vw, 6.875rem);
+  line-height: 0.8;
+}
+
+h2, .footer-menu, .cta {
+  font-size: clamp(2rem, 1.34rem + 2.81vw, 4rem);
+}
+
+h3, p, a, .nav-link {
+  font-size: clamp(0.8rem, 0.96rem + 0.18vw, 1rem);
+}
+
+p {
+  max-width: 65ch;
+  line-height: 2;
+}
+
+a { text-decoration: none; }
+
+small {
+  font-size: clamp(0.8rem, 0.96rem + 0.18vw, 1rem);
+  text-align: center;
+}
+
+/* Text selection */
+::selection {
+  background: #f27657d9;
+  color: var(--dark-to-light);
+}
+
+::-moz-selection {
+  background: orange;
+  color: #FFFFFF;
+}
+
+/* Inline elements */
+.blur-reveal span {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.25em;
+  will-change: transform, opacity, filter;
+}

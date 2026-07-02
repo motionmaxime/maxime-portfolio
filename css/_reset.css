@@ -1,0 +1,53 @@
+/* ============================================================
+   RESET & BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-color: var(--orange) var(--light-to-dark);
+  scrollbar-width: thin;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  background-color: var(--light-to-dark);
+  overflow-x: hidden;
+}
+
+/* Smooth transitions on color/background changes */
+body, a, button, svg, path, .navbar, .contact-btn {
+  transition: 
+    background-color var(--transition),
+    color var(--transition),
+    fill var(--transition),
+    border-color var(--transition);
+}
+
+/* Media elements optimization */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Disable snap for smooth sections */
+#hero, #about, .work-header, footer, .cta, .videos-wrapper {
+  scroll-snap-align: none; 
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-thumb { background: var(--orange); }
+
+/* Mobile optimization */
+@media (max-width: 1024px) {
+  html, body {
+    scroll-snap-type: none;
+    overflow-x: hidden;
+  }
+}

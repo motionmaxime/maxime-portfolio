@@ -1,0 +1,1504 @@
+/* ============================================================
+   TABLE OF CONTENTS
+   1. VARIABLES & THEMES
+   2. RESET & BASE
+   3. TYPOGRAPHY
+   4. UTILITIES & ANIMATIONS
+   5. UI COMPONENTS (Buttons, Cursor)
+   6. HEADER & NAVIGATION
+   7. HERO SECTION
+   8. ABOUT SECTION
+   9. WORK SECTION & VIDEOS
+   10. MODAL & PREVIEW
+   11. CUSTOM VIDEO PLAYER
+   12. CTA & FOOTER
+   ============================================================ */
+
+/* ============================================================
+   1. VARIABLES & THEMES
+   ============================================================ */
+:root {
+  --light-to-dark: #FFF3EC;
+  --dark-to-light: #13182B;
+  --orange: #F27557;
+  --white: #FFF3EC;
+  --dark: #13182B;
+  --orange-to-white: #F27557;
+  
+  --transition: 250ms ease;
+  --transition-slow: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --transition-bezier: 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  
+  --font-main: 'hanken', sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --light-to-dark: #13182B;
+  --dark-to-light: #FFF3EC;
+  --orange-to-white: #FFF3EC;
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-color: var(--orange) var(--light-to-dark);
+  scrollbar-width: thin;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  background-color: var(--light-to-dark);
+  overflow-x: hidden;
+}
+
+/* Transitions globales */
+body, a, button, svg, path, .navbar, .contact-btn {
+  transition: 
+    background-color var(--transition),
+    color var(--transition),
+    fill var(--transition),
+    border-color var(--transition);
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Désactivation Snap pour sections fluides */
+#hero, #about, .work-header, footer, .cta, .videos-wrapper {
+  scroll-snap-align: none; 
+}
+
+/* Scrollbar Custom */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-thumb { background: var(--orange); }
+
+/* Mobile Reset */
+@media (max-width: 1024px) {
+  html, body {
+    scroll-snap-type: none;
+    overflow-x: hidden;
+  }
+}
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+@font-face {
+  font-family: 'hanken';
+  src: url('../fonts/HankenGrotesk-VariableFont_wght.ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'hanken-italic';
+  src: url('../fonts/HankenGrotesk-Italic-VariableFont_wght.ttf');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1, h2, h3, p, a, .footer-menu, .btn-copy, .cta-p, small, .time-display {
+  font-family: var(--font-main);
+  color: var(--dark-to-light);
+  font-weight: 300;
+}
+
+h1{
+  font-size: clamp(3rem, 1.72rem + 5.45vw, 6.875rem);
+  line-height: 0.8;
+}
+
+h2, .footer-menu, .cta {
+  font-size: clamp(2rem, 1.34rem + 2.81vw, 4rem);
+}
+
+h3, p, a, .nav-link {
+  font-size: clamp(0.8rem, 0.96rem + 0.18vw, 1rem);
+}
+
+p {
+  max-width: 65ch;
+  line-height: 2;
+}
+
+a { text-decoration: none; }
+
+small {
+  font-size: clamp(0.8rem, 0.96rem + 0.18vw, 1rem);
+  text-align: center;
+}
+.text-accent {
+    font-family: "Acma", serif !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    color: var(--orange) !important;
+}
+
+::selection {
+  background: #f27657d9;
+  color: var(--dark-to-light);
+}
+::-moz-selection {
+  background: orange;
+  color: #FFFFFF;
+}
+.blur-reveal span {
+    display: inline-block;
+    white-space: nowrap; /* Empêche de casser les mots */
+    margin-right: 0.25em; /* Espace naturel entre les mots */
+    will-change: transform, opacity, filter;
+}
+/* ============================================================
+   4. UTILITIES & ANIMATIONS
+   ============================================================ */
+
+   .orange{
+    color: var(--orange);
+   }
+   .white{
+    color: var(--white);
+   }
+/* Page Transition */
+.page-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; 
+  inset: 0;
+  z-index: 99999999;
+  pointer-events: none;
+  background-color: transparent; /* Fond invisible */
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+/* Le rideau orange dont on change la largeur */
+.page-transition::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 50%; /* Centrage horizontal */
+  transform: translateX(-50%); 
+  height: 100%;
+  /* On utilise une variable pour la largeur en vw */
+  width: var(--bg-width, 100vw); 
+  background-color: var(--orange); /* */
+  z-index: -1;
+  transition: width 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.page-transition p {
+  color: var(--white); /* */
+  white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+}
+
+
+/* Blur Effect */
+.blur-container {
+  width: 100%; pointer-events: none;
+  height: 250px;
+  position: fixed; top: 0; z-index: 99;
+}
+.blur {
+  width: 100%; height: 100%;
+  position: absolute; top: 0;
+  border-radius: 12px;
+}
+.blur div { width: 100%; height: 100%; }
+
+@media (max-width: 768px) {
+  .blur-container { 
+    height: 150px;
+  }
+}
+
+/* Helper Classes */
+.hidden { display: none !important; }
+.hidden-title {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeAndDrop {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(-50%, 50px) scale(0.5); filter: blur(10px); }
+}
+
+@keyframes swipeOutIn {
+  0% { transform: scaleX(1); transform-origin: right center; }
+  45% { transform: scaleX(0); transform-origin: right center; }
+  50% { transform: scaleX(0); transform-origin: left center; }
+  100% { transform: scaleX(1); transform-origin: left center; }
+}
+/*Block reveal*/
+
+/* La classe que tu mets dans ton HTML */
+.reveal-text {
+    visibility: visible; /* Évite un flash du texte brut au chargement */
+    margin: 0;
+    padding: 0;
+}
+
+.reveal-text.processed {
+    visibility: visible;
+}
+.reveal-wrapper {
+    position: relative;
+    display: inline-flex; /* Remplace "table" pour éviter les paddings fantômes */
+    align-items: center;
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    vertical-align: bottom;
+    margin: 0;
+}
+
+.reveal-content {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10%);
+    will-change: transform, opacity;
+    white-space: nowrap;
+}
+
+.reveal-block {
+    position: absolute;
+    inset: 0;
+    background-color: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 10;
+    will-change: transform;
+}
+
+/* --- ACTIVATION UNIQUEMENT SUR DESKTOP + ACCESSIBILITÉ OK --- */
+@media (min-width: 1024px) {
+    .reveal-wrapper {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        overflow: hidden;
+        vertical-align: bottom;
+    }
+
+    /* Cet état sera géré par GSAP, on ne met pas d'opacity 0 ici 
+       pour éviter que le texte disparaisse si le JS plante */
+    .reveal-content {
+        display: inline-block;
+        will-change: transform, opacity;
+    }
+
+    .reveal-block {
+        position: absolute;
+        inset: 0;
+        background-color: var(--orange);
+        transform: scaleX(0);
+        transform-origin: left;
+        z-index: 10;
+    }
+}
+/* ============================================================
+   5. UI COMPONENTS (Buttons, Cursor)
+   ============================================================ */
+/* Buttons Base */
+.big-btn, .big-big-btn, .round-btn {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  background: var(--orange);
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+}
+/* État final (activé par JS) */
+.big-btn.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.big-btn, .big-big-btn {
+  padding: 1rem 1.5rem; margin: 1rem 0;
+  border-radius: 50px;
+  color: var(--white); font-weight: 400;
+  overflow: hidden;
+}
+
+.big-big-btn {
+  padding: 1.5rem 2rem; margin: 0 1rem;
+  vertical-align: middle;
+}
+
+.round-btn {
+  width: 4rem; height: 4rem;
+  padding: 1rem; margin: 0 1rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.btn-txt {
+  position: relative; display: block;
+  overflow: hidden; line-height: 1;
+}
+
+.txt-original, .txt-hover { display: flex; }
+.txt-hover {
+  position: absolute; top: 100%; left: 0;
+}
+.btn-txt span {
+  display: inline-block;
+  transition: transform var(--transition-bezier);
+}
+
+.icon-span { padding-left: 0.2rem; display: flex; }
+.icon-btn { padding-left: 1rem; display: flex; }
+.big-txt { font-size: clamp(2em, 0.96rem + 0.18vw, 2.125rem); }
+
+/* Responsive Buttons */
+@media (max-width: 768px) {
+  .round-btn {
+    width: 2.5rem; height: 2.5rem;
+    padding: 0.8rem; margin: 0 0.5rem;
+  }
+  .big-big-btn { padding: 1rem 1.5rem; margin: 0 1rem; }
+  .big-btn { align-self: center; }
+  .big-txt { font-size: 1.2rem; }
+}
+
+/* Hover Effects (Desktop Only) */
+@media (hover: hover) {
+  .big-btn:hover, .big-big-btn:hover, .reel-btn:hover { scale: 1.02; }
+  .round-btn:hover { transform: scale(1.1) rotate(45deg); }
+  
+  .big-btn:hover .txt-original span,
+  .big-big-btn:hover .txt-original span,
+  .reel-btn:hover .txt-original span { transform: translateY(-110%); }
+  
+  .big-btn:hover .txt-hover span,
+  .big-big-btn:hover .txt-hover span,
+  .reel-btn:hover .txt-hover span { transform: translateY(-100%); }
+}
+
+/* Custom Cursor */
+.cursor {
+  position: fixed; top: 0; left: 0;
+  width: 80px; height: 80px;
+  background-color: var(--orange);
+  color: var(--white);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none; 
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index: 9999;
+  will-change: transform;
+    transform: translateZ(0);
+}
+.cursor.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.cursor-mask {
+  width: 40px; height: 40px;
+  border-radius: 50%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.cursor-icon { display: flex; }
+@keyframes slotAnim {
+  0% { transform: translateY(0);}
+  40% { transform: translateY(-150%);} 
+  41% { transform: translateY(150%); }
+  100% { transform: translateY(0); }   
+}
+.anim-slot { animation: slotAnim 0.4s ease-in-out forwards; }
+
+@media (max-width: 1024px) {
+  .cursor, #custom-cursor { display: none !important; }
+  * { cursor: auto !important; }
+}
+/* ============================================================
+   6. HEADER & NAVIGATION
+   ============================================================ */
+header {
+  position: fixed; top: 0; left: 0;
+  width: 100%; z-index: 1000;
+  pointer-events: none;
+}
+
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 2rem 3rem; pointer-events: auto;
+}
+
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; padding: 0.5rem 2rem;
+  border-radius: 100px; width: fit-content;
+  margin: 2rem auto;
+  position: absolute; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.navbar li { list-style: none; }
+
+/* --- SOULIGNEMENT DYNAMIQUE NAVBAR (Importé du code 1) --- */
+.nav-link { 
+  position: relative; 
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute; 
+  bottom: -4px; 
+  left: 0;
+  width: 100%; 
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--orange);
+  transform: scaleX(0); 
+  transform-origin: right center; 
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-link.active::after { 
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* --- LOGO --- */
+.logo-text {
+  display: flex; align-items: center;
+  transition: var(--transition-slow);
+}
+.logo-text svg { margin-right: 1rem; }
+
+/* --- BOUTON CONTACT --- */
+.contact-btn {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  width: 50px; height: 50px;
+  background-color: var(--orange);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: width var(--transition), border-radius var(--transition);
+}
+.btn-icon, .btn-text {
+  position: absolute;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.btn-icon { display: flex; align-items: center; justify-content: center; }
+.btn-text {
+  color: var(--white); white-space: nowrap;
+  opacity: 0; transform: translateY(50px);
+}
+#lottie-container { width: 2.4rem; height: 2.4rem; }
+
+/* --- THEME TOGGLE --- */
+.light_dark {
+  background: none; border: none; outline: none;
+  padding: 5px; cursor: pointer;
+  transition: var(--transition-slow);
+}
+
+/* --- HOVER EFFECTS (Desktop) --- */
+@media (hover: hover) {
+  /* Le Hover dynamique importé du code 1 */
+  .nav-link:not(.active):hover::after {
+      transform-origin: left center;
+      transform: scaleX(1);
+  }
+  .nav-link.active:hover::after {
+      animation: swipeOutIn 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards; 
+  }
+  
+  /* Reste des hovers */
+  .logo-text:hover, .light_dark:hover { transform: scale(1.05); }
+  .contact-btn:hover { width: 100px; }
+  .contact-btn:hover .btn-icon { transform: translateY(-50px); opacity: 0; }
+  .contact-btn:hover .btn-text { opacity: 1; transform: translateY(0); }
+  .nav-item:hover .arrow-icon { opacity: 0; transform: translate(10px, -10px); }
+}
+
+/* --- RESPONSIVE HEADER --- */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem;}
+  
+  .navbar {
+    position: fixed; bottom: -10px; width: 90%; max-width: 380px;
+    justify-content: space-around;
+    background-color: var(--light-to-dark);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+    padding: 0.8rem 1.2rem;
+    padding-bottom: calc(0.8rem + env(safe-area-inset-bottom));
+    will-change: transform;
+    transform: translateX(-50%) translateZ(0);
+  }
+  
+  .contact-btn { width: 45px; height: 45px; }
+  .btn-icon { transform: translateY(0) !important; opacity: 1 !important; }
+  .btn-text { display: none; }
+}
+
+/* --- PRÉPARATION ANIMATION GSAP --- */
+.logo-text, 
+.nav-link, 
+.contact-btn, 
+.light_dark {
+    will-change: transform, opacity;
+}
+
+body:not(.loaded) .logo-text,
+body:not(.loaded) .nav-link,
+body:not(.loaded) .contact-btn,
+body:not(.loaded) .light_dark {
+    opacity: 0; 
+}
+
+/* ============================================================
+   7. HERO SECTION
+   ============================================================ */
+#hero {
+  height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: end; align-items: center;
+  position: relative;
+}
+
+.bg-logo-container {
+  position: fixed; top: 0; right: 0;
+  height: 100vh; width: 100vw;
+  z-index: -1; pointer-events: none;
+  overflow: hidden; display: block;
+}
+
+.bg-logo-container img {
+  position: absolute; top: 50%; right: 0;
+  height: 100%; width: auto;
+  transform: translateY(-50%);
+  transform-origin: center right;
+  object-fit: cover; object-position: center right;
+  will-change: transform;
+}
+/* Bloque le scroll pendant l'intro */
+body.is-loading {
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* 2. L'overlay commence en FIXED (comme tu l'as déjà) */
+#intro-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%; /* préfère % à vw/vh ici pour éviter les bugs mobile */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    will-change: transform; /* Optimisation pour le parallax */
+}
+#intro-overlay.is-scrollable {
+    position: absolute;
+}
+
+.hyperspace-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none
+}
+
+.flash-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover;
+    display: none; /* CACHÉ PAR DÉFAUT */
+    z-index: 1;
+}
+.intro-txt {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* FLUID CSS : Passe de 1.5rem (mobile) à 4.05rem (desktop) progressivement */
+    padding: 0 clamp(1.5rem, 5vw, 4.05rem);
+    box-sizing: border-box; /* Indispensable pour que le padding ne dépasse pas 100% */
+}
+.intro-name, .intro-job, .intro-about, .line {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px);
+    display: none; 
+}
+
+.intro-name {
+    display: block;
+    /* FLUIDE : Ajusté pour être lisible sur mobile */
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    letter-spacing: 0.05em; /* Ajout léger pour le style "Label" */
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateY(20px);
+}
+
+.intro-job {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(10px);
+}
+.intro-about{
+  width: 100%;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(20px); 
+}
+.about-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+    flex-wrap: wrap; 
+    gap: 2rem; 
+}
+.hero-btn-div {
+    width: 100%;
+    display: block;
+}
+
+.hero-btn {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(5px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 1rem; 
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem; 
+  border-radius: 50px;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 400;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 
+    opacity 0.8s ease-out, 
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    filter 0.8s ease-out,
+    scale 250ms ease-in-out; 
+  will-change: transform, opacity;
+}
+.icon-span { 
+  margin-left: 0; 
+  border-radius: 50%; 
+  width: 2.3rem; 
+  height: 2.3rem;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  color: var(--orange); 
+  flex-shrink: 0; 
+}
+.modal-div {
+    width: 100%;
+    display: block;
+    margin-top: 2rem;
+}
+.about-txt {
+    text-align: left;
+    font-size: clamp(1.35rem, 2vw + 1rem, 2rem);
+    line-height: 1.4;
+    margin-bottom: 16px;
+    
+    flex: 1 1 300px; 
+    max-width: 50ch;
+    width: 100%; 
+}
+.about-txt span {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 0.25em; 
+}
+.about-txt span:last-child {
+    margin-right: 0;
+}
+
+.location-clock {
+    display: inline-flex; align-items: center; gap: 4px; 
+    text-decoration: none; color: var(--dark-to-light); transition: opacity 0.3s ease;
+}
+
+.location-clock:hover { opacity: 0.6; }
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--orange);
+    border-radius: 50%;
+    position: relative;
+}
+
+.pulse-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    background-color: inherit;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.7;
+    animation: pulse-animation 2s infinite ease-out;
+}
+
+/*------------------------*/
+       /*Hero-reel*/
+/*------------------------*/
+.hero-reel-bg {
+    position: fixed; 
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 55; 
+    display: none; 
+    pointer-events: none; 
+}
+
+.hero-reel-bg.is-active {
+    pointer-events: auto; 
+    background-color: none; 
+}
+
+.hero-reel-video {
+    position: absolute;
+    object-fit: cover;
+    will-change: top, left, width, height;
+    cursor: pointer; 
+}
+
+.reel-btn {
+    position: absolute;
+    top: 50%;
+    margin-top: -24px; 
+    z-index: 950;
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 8px 8px 16px;
+    border-radius: 50px;
+    background-color: var(--orange); color: var(--white);
+    border: none; cursor: pointer;
+    font-family: var(--font-main);
+    opacity: 0; visibility: hidden;
+}
+
+.reel-mute-btn { left: 3rem; }
+.reel-close-btn { right: 3rem; flex-direction: row-reverse; padding: 8px 16px 8px 8px; }
+
+.reel-btn-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    background-color: var(--white); color: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 768px) {
+    
+    /* 1. On prépare le terrain sur le conteneur de base (point de départ et durée) */
+    .hero-reel-bg {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+        transition: backdrop-filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                    -webkit-backdrop-filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* 2. On applique le flou ciblé */
+    .hero-reel-bg.is-active {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px); /* Indispensable pour iPhone/Safari */
+    }
+
+    /* 3. Comportement de la vidéo */
+    .hero-reel-bg.is-active .hero-reel-video {
+        object-fit: contain !important;
+    }
+
+    /* 4. Placement des boutons */
+    .reel-mute-btn { 
+        left: 1.5rem; 
+        bottom: auto;
+        top: calc(50vh + 28vw + 1.5rem); 
+        margin-top: 0; 
+    }
+    
+    .reel-close-btn { 
+        right: 1.5rem; 
+        bottom: auto;
+        top: calc(50vh + 28vw + 1.5rem); 
+        margin-top: 0; 
+    }
+}
+/*------------------------*/
+@media (max-width: 1024px) {
+    #hero {
+  height: 60vh;
+}
+}
+@media (max-width: 768px) {
+    #hero {
+  height: 85vh;
+}
+    .about-row {
+        flex-direction: column;
+        height: 100px;
+        gap: 1rem;
+    }
+    
+    .about-txt {
+        max-width: 100%; /* Utilise toute la largeur */
+        text-align: left;
+    }    
+    .intro-txt {
+        align-items: flex-start; 
+        text-align: left; /* Pour que le texte à l'intérieur se centre */
+    }
+    .hero-btn{
+      margin-top: 4rem;
+    }
+    .modal-div {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+    .location-clock{
+      display: none;
+      visibility: hidden;
+    }
+    
+    /* Si tu veux que le nom/job reste centré, retire la ligne ci-dessus */
+}
+/* ============================================================
+   9. WORK SECTION & VIDEOS
+   ============================================================ */
+#work {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative;
+  z-index: 60; /* Devant le hero et l'image qui descend */
+  
+  /* C'est ici que la magie opère : */
+  /* On tire la section vers le haut de 25% de l'écran */
+  margin-top: -15vh; 
+  
+  background-color: transparent;
+  pointer-events: none; /* Laisse le scroll se faire */
+}
+
+/* On réactive les clics sur les contenus du work */
+#work > * {
+    pointer-events: auto;
+}
+.selected-work{
+  margin-top: 6rem;
+  margin-bottom: -8rem;
+}
+.work-header {
+  display: flex; flex-direction: column; align-items: center;
+  margin-bottom: -6rem;
+}
+
+.work-txt { font-weight: 400; }
+.work-txt2 { font-family: 'hanken-italic'; }
+
+.videos-wrapper {
+  position: relative;
+  transform-origin: center top; 
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 999;
+  opacity: 0; /* Caché au départ */
+    visibility: hidden;
+}
+
+.video1, .video2-3, .video4, .work-video{
+  scroll-snap-align: center;
+  position: relative;
+  width: 100%; height: 100vh; 
+  display: flex; justify-content: center; align-items: center;
+}
+.video4{
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+}
+
+video {
+  width: 100vw; height: 100vh;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute; inset: 0; z-index: 3;
+  pointer-events: none !important;
+}
+
+.video-overlay h3, .video-overlay p {
+  position: absolute; bottom: 0; left: 0;
+  padding: 3rem; margin: 0;
+  line-height: 1.5; color: var(--dark);
+}
+
+/* Sommaire & Scroll Indicators */
+
+
+
+/* --- CONTAINER GLOBAL (Tes réglages d'origine) --- */
+#video-cursor-preview {
+    position: fixed; 
+    top: 0; left: 0;
+    width: 300px; height: 180px; 
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    z-index: 9999; 
+    pointer-events: none;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+    /* ÉTAT INITIAL (Caché + Petit + Décalé au dessus à gauche du curseur) */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-110%, -110%) scale(0.5);
+    transform-origin: bottom right;
+
+    /* Animation du Pop */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                opacity 0.2s ease, 
+                visibility 0.2s ease;
+                
+    will-change: transform, left, top;
+}
+
+#video-cursor-preview.active {
+    opacity: 1; 
+    visibility: visible;
+    /* ÉTAT FINAL (Taille normale) */
+    transform: translate(-110%, -110%) scale(1);
+}
+
+/* Gestion Image/Vidéo (Ta demande précédente) */
+#video-cursor-preview img, #video-cursor-preview video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+}
+#video-cursor-preview img { z-index: 1; }
+#video-cursor-preview video { z-index: 2; opacity: 0; transition: opacity 0.3s ease; }
+#video-cursor-preview video.is-playing { opacity: 1; }
+
+
+
+
+
+.sommaire-wrapper {
+  position: absolute; right: 0; top: 0;
+  height: 100%; z-index: 99999999;
+  pointer-events: none;
+}
+.sommaire-div {
+  position: sticky; top: 0;
+  display: flex; justify-content: center; align-items: center;
+  width: 100%; height: 25%;
+}
+.sommaire {
+  top: 50%; right: 0; z-index: 9999;
+  display: flex; justify-content: center;
+  transform: translateY(-50%);
+}
+.scroll-indicators {
+  position: relative; right: 1rem;
+  display: flex; flex-direction: column; align-items: end;
+}
+.indicator-click { padding: 10px 0px 10px 15px; }
+.indicator {
+  width: 15px; height: 2px;
+  background-color: var(--dark);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+  will-change: transform;
+    transform: translateZ(0);
+}
+.indicator-click:hover .indicator:not(.active) { width: 20px; }
+.indicator.active { width: 30px; background-color: var(--orange); }
+
+.work-btn{
+  writing-mode: vertical-rl; 
+  text-orientation: mixed;
+  outline: none;
+  border: none;
+  background: none;
+  opacity: 1;
+  font-size: 16px;
+  letter-spacing: 2px;
+  transition: var(--transition);
+  will-change: transform;
+}
+
+.work-btn:hover{
+  color: var(--orange);
+  transform: translateY(3px);
+}
+
+/* Responsive Work Section */
+@media (max-width: 1024px) {
+  .work-header { margin-bottom: 3rem; }
+  
+  .scroll-indicators { display: none !important; }
+
+  .video1, .video2-3, .video4, .work-video {
+    display: flex !important;       
+    flex-direction: column !important;
+    aspect-ratio: auto !important;  
+    height: auto !important;       
+    transform: none !important;     
+    margin-bottom: 4rem;
+  }
+  .video1 video, .video2-3 video, .video4 video, .work-video video {
+    order: 1; position: relative; width: 100%; height: auto;
+  }
+  .video-overlay {
+    order: 2; position: relative !important;
+    margin-top: 2rem; margin-left: 2rem;
+    pointer-events: auto !important;
+  }
+  .video-overlay h3, .video-overlay p {
+    position: relative !important; padding: 0 !important; margin: 0 !important;
+    inset: auto !important; color: var(--dark-to-light) !important; 
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .work-header { margin-bottom: -5rem; }
+  .video-overlay { margin-top: 0.5rem; margin-left: 0.5rem; }
+}
+
+/* ============================================================
+   10. MODAL & PREVIEW
+   ============================================================ */
+/* Video Hover Preview */
+.video-preview {
+  position: fixed; top: 0; left: 0;
+  width: 300px; height: 180px; aspect-ratio: 16/9;
+  border-radius: 10px;
+  transform: translate(-110%, -110%) scale(0.5); 
+  transform-origin: bottom right; 
+  visibility: hidden; pointer-events: none;
+  z-index: 9999; opacity: 0;
+  transition: transform var(--transition-bezier),
+              opacity var(--transition-bezier),
+              visibility var(--transition-bezier);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  will-change: transform;
+    transform: translateZ(0);
+}
+.video-preview.active {
+  opacity: 1; visibility: visible;
+  transform: translate(-110%, -110%) scale(1);
+}
+.video-preview video {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* Modal */
+#modal {
+  z-index: 99999;
+  position: fixed; inset: 0;
+  display: flex; justify-content: center; align-items: center;
+  backdrop-filter: blur(15px);
+  opacity: 0; 
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    #modal { backdrop-filter: none; background-color: rgba(0,0,0,0.95); }
+}
+
+/* QUAND LE MODAL EST OUVERT (Target) */
+#modal:target { 
+  opacity: 1; 
+  visibility: visible; 
+}
+
+/* La fenêtre contenant la vidéo */
+.modal-window {
+  position: relative; 
+  width: auto; 
+  max-width: 90vw; 
+  max-height: 80vh;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  /* L'animation d'arrivée (Spring/Elastic doux) */
+  transition: opacity 0.5s ease, transform 0.5s ease-out;
+  
+  will-change: transform, opacity;
+}
+
+/* QUAND LE MODAL EST OUVERT -> La fenêtre monte */
+#modal:target .modal-window {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Contenu Vidéo */
+.modal-window .custom-player, .modal-window video {
+  width: 100%; height: 100%; display: block; 
+}
+.modal-window video { object-fit: cover; }
+
+/* Bouton Fermer */
+.modal-close {
+  z-index: 100; position: absolute; top: 15px; right: 15px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+  
+  opacity: 0; transform: scale(0);
+}
+
+#modal:target .modal-close {
+  opacity: 1; transform: scale(1);
+}
+
+.modal-close:hover { 
+  transform: scale(1.1) rotate(90deg) !important; 
+}
+/* ============================================================
+   11. CUSTOM VIDEO PLAYER
+   ============================================================ */
+.custom-player {
+  position: relative; overflow: hidden;
+}
+.custom-player:not(.paused):not(.user-active) { cursor: auto; }
+.custom-player:not(.paused):not(.user-active) .custom-controls { pointer-events: none !important; }
+
+.custom-controls {
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 95%;
+  display: flex; align-items: center; gap: 16px;
+  z-index: 20; opacity: 0;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.custom-player.paused .custom-controls,
+.custom-player.user-active .custom-controls {
+  opacity: 1; pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0);
+}
+
+.center-play-btn {
+  position: absolute; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 60px; 
+  height: 60px;
+  background: var(--orange);
+  border-radius: 50%; 
+  border: none;
+  padding: 0; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: var(--white); 
+  cursor: pointer;
+  z-index: 10; 
+  
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+  
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.center-play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.15); 
+}
+
+.center-play-btn svg { 
+  width: 22px; 
+  height: 22px; 
+  fill: currentColor;
+  display: block;
+  pointer-events: none;
+}
+
+.custom-player.playing .center-play-btn,
+.custom-player.playing .video-overlay {
+  opacity: 0; pointer-events: none;
+}
+
+.left-pill, .right-pill, .time-display {
+  display: flex; justify-content: center; align-items: center;
+  background-color: var(--orange);
+  border-radius: 100px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+  will-change: transform;
+    transform: translateZ(0);
+}
+.left-pill { padding: 10px; }
+.right-pill { gap: 16px; padding: 10px 20px; }
+
+.ctrl-btn {
+  display: flex; justify-content: center; align-items: center;
+  width: 40px; height: 40px;
+  background: none; border: none;
+  color: var(--white); cursor: pointer;
+  transition: var(--transition-slow);
+}
+.ctrl-btn:hover { transform: scale(1.1); }
+.ctrl-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.time-display {
+  font-size: 0.9rem; white-space: nowrap; min-width: auto;
+  padding: 10px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.585);
+  will-change: transform;
+    transform: translateZ(0);
+  color: var(--white);
+}
+
+.progress-container {
+  flex-grow: 1; height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px; cursor: pointer;
+  position: relative; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.327);
+  will-change: transform;
+    transform: translateZ(0);
+}
+.progress-filled {
+  height: 100%; width: 0%;
+  background: var(--orange); border-radius: 10px;
+}
+.volume-btn svg, .fs-btn svg { width: 20px; height: auto; fill: none; }
+
+/* Fullscreen Styles */
+.custom-player:fullscreen,
+.custom-player:-webkit-full-screen {
+  width: auto !important; height: 100vh !important;
+  max-height: 100% !important; margin: 0 !important;
+  padding: 0 !important; border-radius: 0 !important;
+  background-color: var(--dark);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+}
+.custom-player:fullscreen video,
+.custom-player:-webkit-full-screen video {
+  width: auto !important; height: 100% !important;
+  object-fit: contain !important; 
+}
+.custom-player:fullscreen .custom-controls,
+.custom-player:-webkit-full-screen .custom-controls {
+  bottom: 30px; width: 90%; z-index: 2147483647;
+}
+
+/* Responsive Player (Mobile) */
+@media (max-width: 768px) {
+  .custom-controls { bottom: 10px; width: 95%; }
+  .left-pill, .volume-btn { display: none; }
+  .right-pill { width: 35px; height: 35px; padding: 5px 5px; }
+  .time-display { font-size: 0.7rem; }
+  .volume-btn svg, .fs-btn svg { width: 15px; }
+}
+
+/* ============================================================
+   12. CTA & FOOTER
+   ============================================================ */
+.cta {
+  text-align: center; line-height: 1.5; 
+  margin-top: 8rem;
+  
+}
+
+footer {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-end; /* Aligné en bas pour le style magazine */
+  flex-wrap: wrap; /* Important : permet de passer à la ligne sur tablette */
+  gap: 2rem; /* Espace entre le bloc gauche et droite si ça wrap */
+  margin: 3rem; /* Marges desktop */
+  padding-top: 12rem; /* Un peu d'air au dessus */
+}
+
+/* Container des liens réseaux */
+.rsn {
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+  /* Pas de margin-bottom ici, on gère l'espacement via le footer gap */
+}
+
+.rsn a {
+  position: relative; 
+  padding-bottom: 2px;
+  display: inline-block;
+  color: var(--dark-to-light); /* Assure-toi que la couleur est bonne */
+}
+
+/* Ton animation de survol (Inchangée, elle est top) */
+.rsn a::after {
+  content: '';
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  height: 2px;
+  border-radius: 2px; 
+  background-color: var(--orange);
+  
+  /* CHANGEMENT ICI : On le cache par défaut */
+  transform: scaleX(1); 
+  transform-origin: left center;
+}
+.rsn a:hover::after {
+  animation: swipeOutIn 0.4s ease-in-out forwards;
+}
+.rsn a .revealed::after {
+  transform: scaleX(1);
+  transition: transform 0.6s ease-out;
+}
+
+/* 3. Animation au Hover */
+/* On cible .revealed pour éviter que l'anim se lance pendant le chargement */
+.rsn a.revealed:hover::after {
+  animation: swipeOutIn 0.4s ease-in-out forwards;
+}
+
+/* Bouton Copy & Legal */
+.btn-copy {
+  font-size: clamp(1rem, 0.96rem + 0.18vw, 1.2rem);
+  font-weight: 400; 
+  background: none; border: none; outline: none;
+  cursor: pointer;
+  color: var(--dark-to-light);
+  padding-top: 10px;
+}
+.copyright{
+  font-family: var(--font-main);
+  color: var(--dark-to-light);
+  font-weight: 300;
+}
+
+.legal {
+  display: flex; 
+  align-items: center; 
+  color: var(--dark-to-light);
+  gap: 15px; /* Un peu plus d'espace entre les liens légaux */
+  flex-wrap: wrap; /* Permet aux liens de passer à la ligne si écran étroit */
+}
+
+.legal a { 
+  font-weight: 400; 
+  color: var(--dark-to-light);
+  white-space: nowrap; /* Évite de couper "Terms of service" en deux */
+}
+
+/* Hover Effects Desktop */
+@media (hover: hover) {
+  .legal a:hover, .btn-copy:hover { 
+    text-decoration: underline; 
+    text-underline-offset: 4px; /* Plus joli */
+  }
+}
+
+/* On force le conteneur légal à ne pas créer de blocs verticaux internes */
+.legal.reveal-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    white-space: nowrap; /* Empêche le retour à la ligne pendant l'anim */
+}
+
+/* On s'assure que les éléments internes ne cassent pas le flux inline */
+.legal a, 
+.legal span {
+    display: inline; 
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Ajustement du wrapper injecté pour qu'il englobe tout horizontalement */
+.reveal-wrapper {
+    display: inline-flex !important;
+    align-items: center;
+    width: fit-content;
+}
+/* ============================================================
+   RESPONSIVE (Mobile & Tablette)
+   ============================================================ */
+@media (max-width: 768px) {
+  .cta{
+    margin-top: 0;
+  }
+  footer {
+    flex-direction: column; /* On empile tout */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem; /* Espace entre les blocs */
+    text-align: left;
+    margin-top: -4rem;
+    
+    /* Marge latérale réduite pour gagner de la place sur petit écran */
+    margin-left: 1.5rem; 
+    margin-right: 1.5rem;
+    
+    /* TRES IMPORTANT : Marge en bas pour ne pas être caché par la Navbar Mobile */
+    margin-bottom: calc(120px + env(safe-area-inset-bottom)); 
+  }
+  /* On garde les réseaux en ligne, c'est plus clean que l'un sur l'autre */
+  .rsn {
+    flex-direction: row; 
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .legal {
+    gap: 1rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .legal .separator {
+      display: none !important;
+  }
+}

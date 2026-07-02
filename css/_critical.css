@@ -1,0 +1,105 @@
+/* ============================================================
+   CRITICAL CSS - Above the fold styles
+   This should be inlined in the HTML head for best performance
+   ============================================================ */
+
+:root {
+  --light-to-dark: #FFF3EC;
+  --dark-to-light: #13182B;
+  --orange: #F27557;
+  --white: #FFF3EC;
+  --dark: #13182B;
+  --transition: 250ms ease;
+  --font-main: 'hanken', sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --light-to-dark: #13182B;
+  --dark-to-light: #FFF3EC;
+}
+
+/* Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+body { background-color: var(--light-to-dark); overflow-x: hidden; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+/* Typography - Critical */
+@font-face {
+  font-family: 'hanken';
+  src: url('../fonts/HankenGrotesk-VariableFont_wght.ttf');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+h1, h2, h3, p, a {
+  font-family: var(--font-main);
+  color: var(--dark-to-light);
+}
+
+h1 { font-size: clamp(3rem, 1.72rem + 5.45vw, 6.875rem); line-height: 0.8; }
+
+/* Header Navigation - Critical */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--light-to-dark);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+
+.navbar { display: flex; gap: 2rem; align-items: center; }
+
+.nav-link { color: var(--dark-to-light); text-decoration: none; font-weight: 500; }
+
+/* Hero Section - Critical */
+#hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Page Transition - Critical */
+.page-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; 
+  inset: 0;
+  z-index: 99999999;
+  pointer-events: none;
+  background-color: transparent;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.page-transition::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%); 
+  height: 100%;
+  width: var(--bg-width, 100vw); 
+  background-color: var(--orange);
+  z-index: -1;
+  transition: width 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.page-transition p {
+  color: var(--white);
+  white-space: nowrap;
+}

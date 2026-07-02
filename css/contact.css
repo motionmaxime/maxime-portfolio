@@ -1,0 +1,200 @@
+
+main {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    font-family: 'hanken', sans-serif;
+    font-size: clamp(2rem, 1.34rem + 2.81vw, 3.5rem);
+    font-weight: 300;
+    color: var(--dark-to-light);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    width: 100%;
+    height: 100vh;
+    max-width: 900px;
+    
+}
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 1rem;
+}
+.identity{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 128px;
+}
+.form-group {
+    width: 100%;
+}
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid var(--orange);
+    padding: 10px 0;
+    font-family: 'hanken', sans-serif;
+    font-size: clamp(1.1rem, 0.96rem + 0.18vw, 1.225rem);
+    color: var(--dark-to-light);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+::placeholder {
+    color: var(--dark-to-light);
+    opacity: 0.5;
+    font-weight: 300;
+}
+textarea {
+    width: 100%;
+    background: transparent;
+    border: 3px solid var(--orange);
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'hanken', sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+    color: var(--dark-to-light);
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+textarea:focus {
+    border-color: var(--orange);
+}
+.form-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: -2rem;
+}
+.small-p{
+    
+    color: var(--dark-to-light);
+    opacity: 0.5;
+    font-weight: 300;
+}
+.answer-time {
+    font-family: 'hanken', sans-serif;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    color: var(--dark-to-light);
+}
+.btn-submit {
+    border: none;
+    font-family: 'hanken', sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);font-size: 1.rem;
+    font-weight: 400;
+}
+.email{
+    font-family: 'hanken', sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+    font-weight: 300;
+    text-decoration: none;
+}
+.links{
+    width: 100%;
+    max-width: 900px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 2rem;
+}
+.links a:hover{
+    text-decoration: underline;
+}
+.hidden {
+  display: none !important;
+}
+#success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-top: -2rem;
+    width: 100%;
+}
+.success-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: fit-content; 
+    max-width: 90vw;
+}
+#success-message h2 {
+    text-align: center;
+    font-size: clamp(1.5rem, 0.96rem + 1.5vw, 3.125rem);
+    white-space: nowrap; 
+}
+.success-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+
+}
+#success-message div{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*Contact tablette*/
+@media (max-width: 1024px) {
+.links{
+    display: none;
+}
+}
+/*Contact mobile*/
+@media (max-width: 768px) {
+main {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#contact-title{
+    margin-top: 6rem;
+}
+.links{
+    display: none;
+}
+.identity{
+    flex-direction: column;
+    gap: 16px;
+}
+#success-message h2 {
+    white-space: normal; /* Sur mobile, on laisse le titre passer à la ligne */
+}
+.success-infos {
+    flex-direction: column; /* On empile les textes sur mobile */
+    gap: 0.5rem;
+    text-align: center;
+}
+#success-message div{
+    margin-top: 1rem ;
+    flex-direction: column;
+    gap: 0;
+}
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea,
+.contact-form .form-footer {
+    will-change: transform, opacity, filter, clip-path;
+}

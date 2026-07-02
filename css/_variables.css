@@ -1,0 +1,26 @@
+/* ============================================================
+   VARIABLES & THEMES
+   ============================================================ */
+:root {
+  /* Colors */
+  --light-to-dark: #FFF3EC;
+  --dark-to-light: #13182B;
+  --orange: #F27557;
+  --white: #FFF3EC;
+  --dark: #13182B;
+  --orange-to-white: #F27557;
+  
+  /* Transitions */
+  --transition: 250ms ease;
+  --transition-slow: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --transition-bezier: 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  
+  /* Typography */
+  --font-main: 'hanken', sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --light-to-dark: #13182B;
+  --dark-to-light: #FFF3EC;
+  --orange-to-white: #FFF3EC;
+}

@@ -1,0 +1,42 @@
+# robots.txt - Search Engine Instructions
+# Created: February 2025
+
+# Allow all bots to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow admin or private areas (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /node_modules/
+
+# Specify crawl delay (optional, for slower servers)
+# Crawl-delay: 1
+
+# Point to sitemap
+Sitemap: https://maxime-pommier.com/sitemap.xml
+
+# Additional rules for specific bots (optional)
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: DotBot
+Disallow: /
