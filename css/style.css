@@ -171,6 +171,7 @@ small {
    .white{
     color: var(--white);
    }
+
 /* Page Transition */
 .page-transition {
   display: flex;
@@ -223,6 +224,9 @@ small {
 @media (max-width: 768px) {
   .blur-container { 
     height: 150px;
+  }
+  .white{
+    color: var(--dark);
   }
 }
 
@@ -670,6 +674,17 @@ body.is-loading {
     filter: blur(10px);
     transform: translateY(10px);
 }
+.intro-name, 
+.intro-job {
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Si tes éléments sont en position absolue, ajoute aussi ceci : */
+    left: 0;
+    right: 0;
+}
 .intro-about{
   width: 100%;
   opacity: 0;
@@ -1097,6 +1112,8 @@ video {
 @media (max-width: 768px) {
   .work-header { margin-bottom: -5rem; }
   .video-overlay { margin-top: 0.5rem; margin-left: 0.5rem; }
+  .video4{ box-shadow: none;}
+  .work-btn{display: none;}
 }
 
 /* ============================================================
