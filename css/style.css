@@ -96,7 +96,7 @@ img, picture, video, canvas, svg {
    ============================================================ */
 @font-face {
   font-family: 'hanken';
-  src: url('../fonts/HankenGrotesk-VariableFont_wght.ttf');
+  src: url('../fonts/HankenGrotesk-VariableFont_wght.8086ecb5807b.woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -104,7 +104,7 @@ img, picture, video, canvas, svg {
 
 @font-face {
   font-family: 'hanken-italic';
-  src: url('../fonts/HankenGrotesk-Italic-VariableFont_wght.ttf');
+  src: url('../fonts/HankenGrotesk-Italic-VariableFont_wght.746530163903.woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

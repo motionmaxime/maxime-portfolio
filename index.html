@@ -13,44 +13,37 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- URLs Canoniques (Pointent vers la racine du domaine pour l'accueil) -->
-    <link rel="canonical" href="https://maximepommier.fr/">
-    <link rel="alternate" hreflang="fr" href="https://maximepommier.fr/">
+    <link rel="canonical" href="https://www.maximepommier.fr/">
     
     <!-- OpenGraph (Pour le partage sur LinkedIn, Discord, etc.) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://maximepommier.fr/">
+    <meta property="og:url" content="https://www.maximepommier.fr/">
     <meta property="og:title" content="Maxime Pommier - Motion Designer | SaaS Animation">
     <meta property="og:description" content="19-year-old motion designer specializing in SaaS. I create precise, high-end motion design that clarifies complex digital products.">
-    <meta property="og:image" content="https://maximepommier.fr/img/social-share.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://www.maximepommier.fr/img/logo-bg.webp">
     
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="Maxime Pommier - Motion Designer | SaaS Animation">
     <meta property="twitter:description" content="19-year-old motion designer specializing in SaaS. I create precise, high-end motion design that clarifies complex digital products.">
-    <meta property="twitter:image" content="https://maximepommier.fr/img/social-share.jpg">
+    <meta property="twitter:image" content="https://www.maximepommier.fr/img/logo-bg.webp">
     
     <!-- JSON-LD Schema (Avec le bon domaine .fr) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Maxime Pommier",
-      "url": "https://maximepommier.fr",
-      "image": "https://maximepommier.fr/img/logo-bg.webp",
-      "jobTitle": "Motion Designer",
-      "description": "19-year-old motion designer specializing in SaaS animation and motion graphics",
-      "sameAs": [
-        "https://www.instagram.com/pmr_maxime",
-        "https://www.linkedin.com/in/motion-maxime"
-      ],
-      "contact": {
-        "@type": "ContactPoint",
-        "email": "motion.maxime@gmail.com",
-        "contactType": "Customer Support"
-      }
-    }
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Maxime Pommier",
+  "url": "https://www.maximepommier.fr",
+  "image": "https://www.maximepommier.fr/img/logo-bg.webp",
+  "jobTitle": "Motion Designer",
+  "description": "19-year-old motion designer specializing in SaaS animation and motion graphics",
+  "sameAs": [
+    "https://www.instagram.com/pmr_maxime",
+    "https://www.linkedin.com/in/motion-maxime"
+  ],
+  "email": "motion.maxime@gmail.com"
+}
     </script>
 
     <!-- Preconnects pour la rapidité -->
@@ -61,7 +54,7 @@
     
     <!-- Preloads (Critical CSS, Fonts, Hero Image) -->
     <link rel="preload" href="./css/style.css" as="style">
-    <link rel="preload" href="./fonts/HankenGrotesk-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./fonts/HankenGrotesk-VariableFont_wght.8086ecb5807b.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./img/logo-bg.webp" as="image" fetchpriority="high">
     
     <!-- Stylesheets -->
@@ -182,14 +175,14 @@
                                 <a class="indicator-click" data-video="./project/skool/skool-vignette.mp4" data-poster="./project/skool/vignette-skool.webp" href="#vid1" aria-label="Go to project 1">
                                     <div class="indicator active" onclick="scrollToVideo(0)" ></div>
                                 </a>
-                                <a class="indicator-click" data-video="./project/ledger/ledger-vignette.mp4" data-poster="./project/ledger/thumbnail.webp" href="#vid2" aria-label="Go to project 2">
-                                    <div class="indicator" onclick="scrollToVideo(1)" ></div>
+                                <a class="indicator-click" data-video="./project/ramp-token-management/ramp-vignette.mp4" data-poster="./project/ramp-token-management/AI-is-great.webp" href="#vid2" aria-label="Go to project 2">
+                                    <div class="indicator" onclick="scrollToVideo(1)"></div>
                                 </a>
-                                <a class="indicator-click" data-video="./project/r&d/R&D-vignette.mp4" data-poster="./project/r&d/thumbnail.webp" href="#vid3" aria-label="Go to project 3">
+                                <a class="indicator-click" data-video="./project/ledger/ledger-vignette.mp4" data-poster="./project/ledger/thumbnail.webp" href="#vid3" aria-label="Go to project 3">
+                                    <div class="indicator" onclick="scrollToVideo(2)" ></div>
+                                </a>
+                                <a class="indicator-click" data-video="./project/r&d/R&D-vignette.mp4" data-poster="./project/r&d/thumbnail.webp" href="#vid4" aria-label="Go to project 4">
                                     <div class="indicator" onclick="scrollToVideo(3)"></div>
-                                </a>
-                                <a class="indicator-click" data-video="./project/parfum/parfum-vignette.mp4" data-poster="./project/parfum/vignette-parfum.webp" href="#vid4" aria-label="Go to project 4">
-                                    <div class="indicator" onclick="scrollToVideo(2)"></div>
                                 </a>
                             </div>
                             <a href="./work.html" class="work-btn">work</a>
@@ -208,6 +201,16 @@
                     </a>
                 </article>
                 <article class="video2-3" id="vid2">
+                    <a href="./ramp.html" aria-label="View Ramp case study">
+                        <div class="video-item">
+                            <video src="./project/ramp-token-management/Ramp-main.mp4" muted loop playsinline poster="./project/ramp-token-management/AI-is-great.webp" preload="metadata" title="Ramp intro video" loading="lazy"></video>
+                        </div>
+                        <div class="video-overlay">
+                            <h3><span class="work-txt reveal-text">Ramp</span><br><span class="work-txt2 reveal-text">2026</span></h3>
+                        </div>
+                    </a>
+                </article>
+                <article class="video2-3" id="vid3">
                     <a href="./ledger.html" aria-label="View Ledger case study">
                         <div class="video-item">
                             <video src="./project/Ledger/Ledger-nano-x.mp4" muted loop playsinline poster="./project/Ledger/thumbnail.webp" preload="metadata" title="Ledger demo video" loading="lazy"></video>
@@ -217,24 +220,14 @@
                         </div>
                     </a>
                 </article>
-                 <article class="video2-3" id="vid3">
-                    <a href="./r-d.html" aria-label="View Ledger case study">
+                
+                <article class="video4 zoom-out" id="vid4">
+                     <a href="./r-d.html" aria-label="View R-d case study">
                         <div class="video-item">
                             <video src="./project/r&d/R&D-main.mp4" muted loop playsinline poster="./project/r&d/thumbnail.webp" preload="metadata" title="R&D intro video" loading="lazy"></video>
                         </div>
                         <div class="video-overlay">
                             <h3><span class="work-txt reveal-text">R&D</span><br><span class="work-txt2 reveal-text">2026</span></h3>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="video4 zoom-out" id="vid4">
-                     <a href="parfum.html" aria-label="View Parfum case study">
-                        <div class="video-item ">
-                            <video src="./project/parfum/parfum-main.mp4" muted loop playsinline poster="./project/parfum/thumbnail.webp" preload="metadata" title="Parfum product video" loading="lazy"></video>
-                        </div>
-                        <div class="video-overlay">
-                            <h3><span class="work-txt reveal-text">Parfum Tear the norm</span><br><span class="work-txt2 reveal-text">Concept project - 2025</span></h3>
                         </div>
                     </a>
                 </article>
@@ -341,8 +334,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
-    <script src="https://unpkg.com/split-type" defer></script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script src="./js/config.js" defer></script>
     <script src="./js/script.js" defer></script>

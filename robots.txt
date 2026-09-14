@@ -14,14 +14,13 @@ Disallow: /node_modules/
 # Crawl-delay: 1
 
 # Point to sitemap
-Sitemap: https://maximepommier.fr/sitemap.xml
+Sitemap: https://www.maximepommier.fr/sitemap.xml
 
 # Additional rules for specific bots (optional)
 
 # Google Bot
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0
 
 # Bing Bot
 User-agent: Bingbot
