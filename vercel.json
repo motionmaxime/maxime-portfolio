@@ -1,0 +1,22 @@
+{
+  "headers": [
+    {
+      "source": "/fonts/HankenGrotesk-Italic-VariableFont_wght.746530163903.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/HankenGrotesk-VariableFont_wght.8086ecb5807b.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
